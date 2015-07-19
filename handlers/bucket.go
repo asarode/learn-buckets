@@ -34,6 +34,7 @@ func (bh BucketHandler) GetBuckets(w http.ResponseWriter, r *http.Request, p htt
 	resultsJson, _ := json.Marshal(results)
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(200)
 	fmt.Fprintf(w, "%s", resultsJson)
 }
