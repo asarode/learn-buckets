@@ -24945,7 +24945,7 @@ var BucketCreation = (function (_React$Component) {
       links: [{
         title: '',
         url: '',
-        type: ''
+        type: 'article'
       }]
     };
   }
@@ -25002,7 +25002,7 @@ var BucketCreation = (function (_React$Component) {
       this.state.links.push({
         title: '',
         url: '',
-        type: ''
+        type: 'article'
       });
       this.setState({
         links: this.state.links

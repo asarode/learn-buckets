@@ -12,7 +12,7 @@ class BucketCreation extends React.Component {
     	links: [{
     		title: '',
     		url: '',
-    		type: ''
+    		type: 'article'
     	}]
     };
   }
@@ -38,7 +38,7 @@ class BucketCreation extends React.Component {
   	this.state.links.push({
 			title: '',
 			url: '',
-			type: ''
+			type: 'article'
 		});
   	this.setState({
   		links: this.state.links
