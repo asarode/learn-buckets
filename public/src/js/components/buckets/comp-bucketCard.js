@@ -16,7 +16,7 @@ class BucketCard extends React.Component {
 		} = this.props
 
 		return (
-			<div>
+			<div className="lb-card">
 				<h3>{title}</h3>
 				<p>{description}</p>
 				{this.Links}

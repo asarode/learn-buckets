@@ -1,6 +1,6 @@
 import React from 'react';
-import BucketList from './bucketList/comp-bucketList';
-import dummyData from './bucketList/dummyData';
+import { list as BucketList } from './buckets';
+import { RouteHandler } from 'react-router';
 
 class App extends React.Component {
 	constructor(props) {
@@ -10,17 +10,11 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Learn Buckets</h1>
-				<BucketList 
-					bucketData={this.Data} />
+			<div className="row">
+				<h1 className="lb-header">Learn Buckets</h1>
+				<RouteHandler />
 			</div>
 		);
-	}
-
-	get Data() {
-		let data = JSON.parse(JSON.stringify(dummyData)).data;
-		return data;
 	}
 }
 

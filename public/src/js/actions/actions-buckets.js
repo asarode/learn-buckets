@@ -2,12 +2,20 @@ import Constants from '../constants/constants';
 import Dispatcher from '../dispatchers/dispatcher';
 import request from 'superagent';
 
+
 let Actions = {
 	addBucket: function(item) {
 		// add item to mongo
-		// --
-		// send fetchBuckets request
-		this.fetchBuckets();
+		let url = 'http://localhost:3000/buckets'
+		console.log(item);
+		request
+			.post(url)
+			.accept('application/json')
+			.send(item)
+			.end((err, res) => {
+				if (err) console.log(err);
+				this.fetchBuckets();
+			});
 	},
 	fetchBuckets: function() {
 		let url = 'http://localhost:3000/buckets';

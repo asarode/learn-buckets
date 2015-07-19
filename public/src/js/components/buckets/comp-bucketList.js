@@ -2,7 +2,7 @@ import React from 'react';
 import BucketCard from './comp-bucketCard';
 import BucketStore from '../../stores/store-buckets';
 import BucketActions from '../../actions/actions-buckets';
-import dummyData from './dummyData';
+import { Navigation,  } from 'react-router';
 
 class BucketList extends React.Component {
 	constructor(props) {
@@ -26,9 +26,14 @@ class BucketList extends React.Component {
 
 	render() {
 		return (
-			<div>
-				{this.BucketCards}
-			</div>
+				<div className="row">
+					<div className="col-xs-12">
+						<button onClick={() => this.context.router.transitionTo('/buckets/create')}>CREATE</button>
+					</div>
+					<div className="col-xs-12">
+						{this.BucketCards}
+					</div>
+				</div>
 		)
 	}
 
@@ -63,6 +68,10 @@ BucketList.PropTypes = {
 
 BucketList.defaultProps = {
 	className: {}
+}
+
+BucketList.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 export default BucketList;

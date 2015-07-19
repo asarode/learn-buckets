@@ -7,6 +7,7 @@ import (
 	"github.com/asarode/learn-buckets/configs"
 	"github.com/asarode/learn-buckets/handlers"
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 	"gopkg.in/mgo.v2"
 )
 
@@ -25,8 +26,9 @@ func main() {
 
 	router.POST("/buckets", bh.CreateBucket)
 
+	handler := cors.Default().Handler(router)
 	// Start server
-	http.ListenAndServe("localhost:3000", router)
+	http.ListenAndServe("localhost:3000", handler)
 }
 
 func getSession() *mgo.Session {

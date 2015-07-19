@@ -26,7 +26,7 @@ func (bh BucketHandler) GetBuckets(w http.ResponseWriter, r *http.Request, p htt
 	var results []models.Bucket
 	c := bh.session.DB("learn-buckets").C("buckets")
 
-	if err := c.Find(nil).Sort("-timestamp").All(&results); err != nil {
+	if err := c.Find(nil).Sort("-_id").All(&results); err != nil {
 		panic(err)
 		return
 	}
@@ -34,7 +34,7 @@ func (bh BucketHandler) GetBuckets(w http.ResponseWriter, r *http.Request, p htt
 	resultsJson, _ := json.Marshal(results)
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3333")
 	w.WriteHeader(200)
 	fmt.Fprintf(w, "%s", resultsJson)
 }
@@ -72,7 +72,9 @@ func (bh BucketHandler) CreateBucket(w http.ResponseWriter, r *http.Request, p h
 
 	BucketJson, _ := json.Marshal(Bucket)
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(201)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.WriteHeader(200)
 	fmt.Fprintf(w, "%s", BucketJson)
 }
