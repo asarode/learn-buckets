@@ -1,33 +1,30 @@
 import Constants from '../constants/constants';
 import Dispatcher from '../dispatchers/dispatcher';
 import request from 'superagent';
+import alt from '../alt';
 
+let base = 'http://localhost:3000'
 
-let Actions = {
-	addBucket: function(item) {
-		// add item to mongo
-		let url = 'http://localhost:3000/buckets'
-		console.log(item);
-		request
-			.post(url)
+class BucketActions {
+	create(item) {
+		let url = base + '/buckets';
+		request.post(url)
 			.accept('application/json')
 			.send(item)
 			.end((err, res) => {
 				if (err) console.log(err);
-				this.fetchBuckets();
+				this.actions.fetchBuckets();
 			});
-	},
-	fetchBuckets: function() {
-		let url = 'http://localhost:3000/buckets';
-		request
-			.get(url)
+	}
+
+	fetch() {
+		let url = base + '/buckets';
+		request.get(url)
 			.end((err, res) => {
-				Dispatcher.handleViewAction({
-					actionType: Constants.FETCH_BUCKETS,
-					data: res.body
-				});
+				if (err) console.log(err);
+				this.dispatch(res.body);
 			});
 	}
 }
 
-module.exports = Actions;
+export default alt.createActions(BucketActions);

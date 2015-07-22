@@ -1,7 +1,7 @@
 import React from 'react';
 import LinkInput from './comp-linkInput';
 import BucketActions from '../../actions/actions-buckets';
-import { Navigation,  } from 'react-router';
+import { Navigation  } from 'react-router';
 
 class BucketCreation extends React.Component {
   constructor(props) {

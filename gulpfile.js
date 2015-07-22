@@ -5,7 +5,9 @@ var source = require('vinyl-source-stream');
 
 gulp.task('browserify', function() {
     browserify('./public/src/js/main.js')
-      .transform(babelify)
+      .transform(babelify.configure({
+        optional: ['es7.decorators']
+      }))
       .bundle()
       .pipe(source('main.js'))
       .pipe(gulp.dest('dist/js'));

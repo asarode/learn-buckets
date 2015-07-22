@@ -2,26 +2,24 @@ import React from 'react';
 import BucketCard from './comp-bucketCard';
 import BucketStore from '../../stores/store-buckets';
 import BucketActions from '../../actions/actions-buckets';
-import { Navigation,  } from 'react-router';
+import { Navigation  } from 'react-router';
+import connectToStores from 'alt/utils/connectToStores';
 
 class BucketList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			buckets: []
-		};
 	}
 
-	componentWillMount() {
-		BucketStore.addChangeListener(() => {
-			this.setState({
-				buckets: BucketStore.getBucketList()
-			});
-		});
+	static getStores() {
+		return [BucketStore];
+	}
+
+	static getPropsFromStores() {
+		return BucketStore.getState();
 	}
 
 	componentDidMount() {
-		BucketActions.fetchBuckets();
+		BucketActions.fetch();
 	}
 
 	render() {
@@ -37,15 +35,8 @@ class BucketList extends React.Component {
 		)
 	}
 
-	_onChange() {
-		console.log(this);
-		this.setState({
-			buckets: this.BucketData
-		});
-	}
-
 	get BucketCards() {
-		let buckets = this.state.buckets;
+		let buckets = this.props.buckets;
 
 		let cards = buckets.map((item, index) => {
 			return (
@@ -74,4 +65,4 @@ BucketList.contextTypes = {
   router: React.PropTypes.func.isRequired
 }
 
-export default BucketList;
+export default connectToStores(BucketList);
